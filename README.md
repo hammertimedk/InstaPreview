@@ -1,7 +1,7 @@
 InstaPreview
 ============
 
-Instant Preview of blocks for Concrete5
+Instant Preview of blocks for Concrete5 - Warning: This is experimental
 
 By: Arni Johannesson, 2014, Hammertime (www.hammerti.me / arni@hammerti.me)
 
