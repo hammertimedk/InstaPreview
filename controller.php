@@ -27,7 +27,6 @@ class InstaPreviewPackage extends Package {
 	public function on_start() {
 	 $objEnv = Environment::get();
 	 $objEnv->overrideCoreByPackage('libraries/block_view.php', $this);
-	 $objEnv->overrideCoreByPackage('libraries/block_controller.php', $this);
 	 $objEnv->overrideCoreByPackage('models/collection.php', $this);
 	}		
 	
