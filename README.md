@@ -54,15 +54,16 @@ When the user triggers a preview, the following steps are executed:
 1. Full screen iFrame is shown with a loading message
 2. We do an AJAX post in order to grab the currently active and approved version (if any) of the current page
 3. We serialize #ccm-block-form which will contain the Block data and check for tinyMCE weirdness and add some required values (flagging in our request that this is an instapreview and making sure cID is passed)
-4. We now submit the block form as usual. This gets processed and when C5 calls into the getVersionToModify method in the Collection model, our override is run and we force the generation of a new version of the current page
-5. A bit later in the process, Block data has been saved to the new preview version of the page, and in the  BlockController library our save method override makes sure that the new Preview version is immediatly approved and put live
-6.  The src of the full screen iframe is changed to our tunnelling script which streams the page back to the client via. the iFrame as if they were viewing it in the front-end
-7. Preview version of the page is immediatly deleted and we revert back to any previously approved version
-8. When user wishes to dismiss the preview, we simply hide it and clear the iFrame src (I thought this might optimize things a bit). Nothing further to do, as the page should be in a clean state at this point. 
+4. We now submit the block form as usual. This gets processed and when C5 calls into the getVersionToModify method in the Collection model, our override is run and we force the generation of a new version of the current page and approve it immediately
+5.  The src of the full screen iframe is changed to our tunnelling script which streams the page back to the client via. the iFrame as if they were viewing it in the front-end
+6. Preview version of the page is immediatly deleted and we revert back to any previously approved version
+7. When user wishes to dismiss the preview, we simply hide it and clear the iFrame src (I thought this might optimize things a bit). Nothing further to do, as the page should be in a clean state at this point. 
 
 
 Drawbacks, problems
 ============
+
+* For some reason preview collection is sometimes not approved but original active version gets unapproved correctly. This then trips up the code following the tunneling with strange results. Must investigate ...
 
 * Key handlers do not always work as events may get eaten by the block the user is interacting with
 
