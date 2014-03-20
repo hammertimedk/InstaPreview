@@ -21,19 +21,13 @@
 	 //Gets current active version (preview)
 	  $currentversion = CollectionVersion::get($c, "ACTIVE"); //Gets the current active version
 	 
-	 //error_log($currentversion->getVersionID()." Done tunnelling currently approved version with ID: ",0);
-	 
 	 //Delete preview version
 	  $currentversion->delete();
-	  
-	 //error_log($_REQUEST["versionID"]." Deleted the Preview version. Getting and approving original version",0); 
 	 
 	 //Approve previous version
 	 if ($_REQUEST["versionID"]) {
 	  $oldversion = CollectionVersion::get($c, $_REQUEST["versionID"]);
 	  $oldversion->approve(false);
-	  
-	 //error_log($_REQUEST["versionID"]." Original version approved",0); 
 	 }
 	 
 	 }

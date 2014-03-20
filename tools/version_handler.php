@@ -11,10 +11,8 @@
 	
 	 $c = Page::getById($_REQUEST["cID"]);
 	 $currentversion = CollectionVersion::get($c, "ACTIVE"); //Gets the current active version
-	 $draftversion = CollectionVersion::get($c, "RECENT"); //Gets any draft version
 	 
-	 
-	 echo json_encode(Array("version"=>$currentversion->getVersionId(), "draft"=>$draftversion->getVersionId()));
+	 echo json_encode(Array("version"=>$currentversion->getVersionId()));
 	
 	} 
 

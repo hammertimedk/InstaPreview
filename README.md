@@ -66,7 +66,7 @@ Drawbacks, problems
 
 * User might see inconsistent results using Blocks that modify Block form fields on submit using Javascript. (See workaround for tinyMCE) 
  
-* User should preferably not interact with anything on the preview page that posts a form. I have seen this trigger blocks being added twice to an area.
+* User should preferably not interact with anything on the preview page that posts a form as the block/page they are viewing in fact no longer exists (possibly just disable any interaction with the preview with a transparent overlay, but I'm not sure if the drawbacks are worth it)
 
 * The docs say anything in “elements” is easily overridden - in the case of block includes, this is not the case - in core/libraries/block_view.php the header and footer are included statically by eg.:
 ```

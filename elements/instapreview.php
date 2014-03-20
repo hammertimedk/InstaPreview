@@ -37,7 +37,7 @@ $version_handler = $url->getToolsURL('version_handler','instapreview');
       //Which version we need to revert to
       app_vars.previousversion = data.version;
    
-     //Do a vanilla Save POST action for this block, flag that we are InstaPreviewing for Block Controller
+     //Do a vanilla Save POST action for this block, flag that we are InstaPreviewing for Core overrides
      var form_fields = $('#ccm-block-form').serializeArray();
    
      //Workaround for tinyMCE not setting form content untill submit time
@@ -51,7 +51,7 @@ $version_handler = $url->getToolsURL('version_handler','instapreview');
 	  }
 	  } 
 	  
-	  //Flag to core block controller that this is a preview
+	  //Flag to core overrides that this is a preview
 	  form_fields.push({name: "instapreview", value: "true"});
 	
 	  //Make sure cID is always passed through
@@ -61,17 +61,8 @@ $version_handler = $url->getToolsURL('version_handler','instapreview');
    
 	  //Now tunnel the page, give the server 500ms to chill
       window.setTimeout(function() { $('#preview_iframe').attr("src","<?php echo $tunnel_page."?method=tunnelpage&cID=".$c->getCollectionId(); ?>&versionID="+app_vars.previousversion)}, 500);
-
-     //Prep info growl
-      if (keypress) {
-      //tell them to release key
-	 
-	   window.setTimeout(function(){ $('#preview_info').fadeIn(); app_vars.finishedrender = true; },1000);
-      } else {
-      //tell them to hit esc button
 	
 	  window.setTimeout(function(){ $('#preview_info').fadeIn(); app_vars.finishedrender = true; },1000);
-      }
    
    },'json').fail(function() {
     //Show error message and clean up preview version

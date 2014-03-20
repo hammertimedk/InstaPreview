@@ -5,7 +5,6 @@ class Collection extends Concrete5_Model_Collection {
 
 
 		/* Updated this function to ensure that we always get a brand new version of a collection for InstaPreview 
-		 - Somewhat flaky at the moment - sometimes preview collection is not approved for some reason, must investigate...
 		*/
 		function getVersionToModify() {
 		
@@ -17,13 +16,10 @@ class Collection extends Concrete5_Model_Collection {
 		   error_log($this->getVersionObject()->getVersionID()." Preview version Already exists", 0);
 		  } else {
 		 
-		   //error_log("Creating preview version", 0);
 			$nc = $this->cloneVersion("Preview Version");
-		   //error_log($nc->getVersionObject()->getVersionID()."Approving preview version", 0);
 			$nc->getVersionObject()->approve(false); //Approve it immediately
 				
 			$versionid = CollectionVersion::get($nc, 'ACTIVE')->getVersionID();
-		   //error_log($versionid." Is the currently Approved preview version", 0);
 			
 		  }
 			
