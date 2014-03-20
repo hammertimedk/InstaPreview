@@ -10,8 +10,23 @@ class Collection extends Concrete5_Model_Collection {
 		function getVersionToModify() {
 		
 		 if ($_REQUEST["instapreview"]) {
-			$nc = $this->cloneVersion($versionComments); //$versionComments? Look in original method, looks like junk
+		 
+		  if (CollectionVersion::get($this, 'ACTIVE')->getVersionComments() == "Preview Version") {
+		   //We should not find ourselves here - but our currently active version is already the preview version
+		   //This can happen if a block craps out, or does some magic which causes this method to be run twice before a tunnel
+		   error_log($this->getVersionObject()->getVersionID()." Preview version Already exists", 0);
+		  } else {
+		 
+		   //error_log("Creating preview version", 0);
+			$nc = $this->cloneVersion("Preview Version");
+		   //error_log($nc->getVersionObject()->getVersionID()."Approving preview version", 0);
 			$nc->getVersionObject()->approve(false); //Approve it immediately
+				
+			$versionid = CollectionVersion::get($nc, 'ACTIVE')->getVersionID();
+		   //error_log($versionid." Is the currently Approved preview version", 0);
+			
+		  }
+			
 			return $nc;
 		 } else {
 		  return parent::getVersionToModify(); //Otherwise call into stock C5 code

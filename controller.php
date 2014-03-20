@@ -28,6 +28,7 @@ class InstaPreviewPackage extends Package {
 	 $objEnv = Environment::get();
 	 $objEnv->overrideCoreByPackage('libraries/block_view.php', $this);
 	 $objEnv->overrideCoreByPackage('models/collection.php', $this);
+	 $objEnv->overrideCoreByPackage('models/block_types.php', $this);
 	}		
 	
 	public function upgrade() {

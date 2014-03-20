@@ -9,25 +9,37 @@
 	if ($_REQUEST["method"] == "tunnelpage") {
 	
 	 echo file_get_contents(BASE_URL."/index.php?cID=".$_REQUEST["cID"]);
-	 
+	
+	}
+	
+	//If tunnelling, OR if a save block failed then we need to clean up the preview version
+	if ($_REQUEST["method"] == "tunnelpage" || $_REQUEST["method"] == "cleanup") {
+	
 	 //Done tunneling, safe to revert to previous version
 	 $c = Page::getById($_REQUEST["cID"]);
 	 
 	 //Gets current active version (preview)
-	 $currentversion = CollectionVersion::get($c, "ACTIVE"); //Gets the current active version
+	  $currentversion = CollectionVersion::get($c, "ACTIVE"); //Gets the current active version
+	 
+	 //error_log($currentversion->getVersionID()." Done tunnelling currently approved version with ID: ",0);
+	 
+	 //Delete preview version
+	  $currentversion->delete();
+	  
+	 //error_log($_REQUEST["versionID"]." Deleted the Preview version. Getting and approving original version",0); 
 	 
 	 //Approve previous version
 	 if ($_REQUEST["versionID"]) {
 	  $oldversion = CollectionVersion::get($c, $_REQUEST["versionID"]);
 	  $oldversion->approve(false);
+	  
+	 //error_log($_REQUEST["versionID"]." Original version approved",0); 
 	 }
 	 
-	 //Delete preview version
-	  $currentversion->delete();
-
+	 }
 	 
-	 exit();
-	 
+	 if ($_REQUEST["method"] == "tunnelpage") {
+	  exit();
 	 }
 	
 	//If not tunnelling, this tool will display minimal loading UI
@@ -47,7 +59,7 @@
  <div class="spinner"><div class="csspinner double-up"></div></div>
  <h1 class="header">Loading Preview, Please Wait ...</h1>
  
-<?php } else if ($_REQUEST["method"] == "ajaxerror") {  ?>
+<?php } else if ($_REQUEST["method"] == "ajaxerror" || $_REQUEST["method"] == "cleanup") {  ?>
 
  <div class="error_icon"></div>
  <h1 class="header">Oww... Don't let Grumpy Cat get you down ...</h1>

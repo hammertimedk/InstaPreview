@@ -19,12 +19,11 @@ Usage
 
 Preview can be dismissed by clicking the Dismiss Preview button in the top right corner growl. Keyboard hotkeys are somewhat supported*:
 
-* Hold Left Alt to show the preview, release it to return to edit mode
- - I'm considering changing this to double-tap Left Alt to show and dismiss the preview 
+* Double press Ctrl to show the preview, double press again to return to edit mode
 
 * When showing the Preview, Esc works as a panic button. Please note that this closes the Add Block window as well.
 
-*Keypresses are sometimes eaten by blocks. Previewing using keypress while editing a regular content block will not work, for example, as tinyMCE is embedded in an iFrame and the keypress doesn't bubble up to the host document.
+*Hotkey events are sometimes eaten by blocks. Previewing using keypress while editing a regular content block will not work, for example, as tinyMCE is embedded in an iFrame and the keypress doesn't bubble up to the host document.
 
 Background
 ============
@@ -55,7 +54,7 @@ When the user triggers a preview, the following steps are executed:
 2. We do an AJAX post in order to grab the currently active and approved version (if any) of the current page
 3. We serialize #ccm-block-form which will contain the Block data and check for tinyMCE weirdness and add some required values (flagging in our request that this is an instapreview and making sure cID is passed)
 4. We now submit the block form as usual. This gets processed and when C5 calls into the getVersionToModify method in the Collection model, our override is run and we force the generation of a new version of the current page and approve it immediately
-5.  The src of the full screen iframe is changed to our tunnelling script which streams the page back to the client via. the iFrame as if they were viewing it in the front-end
+5. The src of the full screen iframe is changed to our tunnelling script which streams the page back to the client via. the iFrame as if they were viewing it in the front-end
 6. Preview version of the page is immediatly deleted and we revert back to any previously approved version
 7. When user wishes to dismiss the preview, we simply hide it and clear the iFrame src (I thought this might optimize things a bit). Nothing further to do, as the page should be in a clean state at this point. 
 
@@ -63,14 +62,11 @@ When the user triggers a preview, the following steps are executed:
 Drawbacks, problems
 ============
 
-* For some reason preview collection is sometimes not approved but original active version gets unapproved correctly. This then trips up the code following the tunneling with strange results. Must investigate ...
-
 * Key handlers do not always work as events may get eaten by the block the user is interacting with
 
 * User might see inconsistent results using Blocks that modify Block form fields on submit using Javascript. (See workaround for tinyMCE) 
  
 * User should preferably not interact with anything on the preview page that posts a form. I have seen this trigger blocks being added twice to an area.
- - The Preview info Growl should be updated to reflect this
 
 * The docs say anything in “elements” is easily overridden - in the case of block includes, this is not the case - in core/libraries/block_view.php the header and footer are included statically by eg.:
 ```
