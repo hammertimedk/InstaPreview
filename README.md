@@ -5,7 +5,7 @@ Instant Preview of blocks for Concrete5 - Warning: This is experimental
 
 By: Arni Johannesson, 2014, Hammertime (www.hammerti.me / arni@hammerti.me)
 
-See it in action: 
+See it in action: https://www.youtube.com/watch?v=SsVfuPEssNc
 
 Installation
 ============
@@ -28,9 +28,9 @@ Preview can be dismissed by clicking the Dismiss Preview button in the top right
 Background
 ============
 
-About 1 year+ ago I saw this: http://www.youtube.com/watch?v=UK42Hont3to from here: http://blog.codinghorror.com/what-you-cant-see-you-cant-get/ and thought it pretty damn cool. It got me thinking about trying something similar for Concrete5, but never got around to it. Especially after seeing the upcoming 5.7 release previews, I dismissed the idea as being potentially irrellevant. My main gripe with regards to C5 content editing has always been the tinyMCE implementation and Redactor seemed to solve most of my pet peeves. 
+Late 2012 I saw this: http://www.youtube.com/watch?v=UK42Hont3to from here: http://blog.codinghorror.com/what-you-cant-see-you-cant-get/ and thought it pretty damn cool. It got me thinking about trying something similar for Concrete5, but never got around to it. Especially after seeing the upcoming 5.7 release previews, I dismissed the idea as being potentially irrellevant. My main gripe with regards to C5 content editing has always been the tinyMCE implementation and Redactor seemed to solve most of my pet peeves. 
 
-A few weeks ago a Heureka moment hit me with regards to how to actually implement this and I decided to revisit the idea. With the not immediately impending release of v5.7, then I thought this might still be relevant as a concept also considering that the rather winding "add block"->"modal window"->"edit/save"->"publish page"->"Visit page from front end to make absolutely sure everything renders the way I want it" workflow will still exist.
+A year later a Heureka moment hit me with regards to how to actually implement this and I decided to revisit the idea. With the not immediately impending release of v5.7, then I thought this might still be relevant as a concept also considering that the rather winding "add block"->"modal window"->"edit/save"->"publish page"->"Visit page from front end to make absolutely sure everything renders the way I want it" workflow will still exist.
 
 **In short, this package**
 
